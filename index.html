@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimun-scale=1.0,maximum-scale-scale=1.0,user-scalable=no">
+		<title>宽带缴费</title>
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<style>
+			body{ background:#f6f5f5; min-height:100vh; }
+			*{ box-sizing:border-box; }
+			.header{ height:45px; line-height:45px; position:relative; color:#fff; font-size:18px; text-align:center; background-color:#005ca5; }
+			.hd_back{ position:absolute; top:0; left:0; width:45px; height:45px; text-align:center; color:#fff; }
+			
+			.broadband{ padding:10px 0; }
+			.bd_head{ padding:0 10px; line-height:50px; display:flex; align-items:center; font-size:14px; background-color:#fff; margin-bottom:10px; }
+			.bd_head .iconfont{ font-size:20px; color:#1296db; margin-right:5px; }
+			
+			.bd_body{ padding:10px 20px; background-color:#fff; }
+			.type-item{ display:flex; justify-content:space-between; align-items:center; padding:15px 5px; border-bottom:1px solid #d7d7d7; }
+			.status{ width:20px; height:20px; border:2px solid #1296db; border-radius:20px; position:relative; }
+			.name{ display:flex; align-items:center; font-size:16px; color:#333; }
+			.name .iconfont{ font-size:24px; color:#1296db; padding-right:10px; }
+			.active .status:before{ content:""; position:absolute; width:10px; height:10px; border-radius:10px; background-color:#1296db; left: 50%; top: 50%; margin-left: -5px; margin-top: -5px; }
+			.btn-wrap{ margin:20px auto; width:90%; }
+			.btn-block{ height:40px; line-height:40px; border-radius:5px; background-color:#1b82d2; color:#fff; font-size:16px; text-align:center; }
+		</style>
+	</head>
+
+	<body>
+		<header class="header">
+			<a href="" class="hd_back"><span class="icon iconfont">&#xe63b;</span></a>
+			<h1>宽带缴费</h1>
+		</header>
+		<div class="broadband">
+			<div class="bd_head"><span class="iconfont">&#xe62e;</span>选择宽带类型</div>
+			<div class="bd_body">
+				<ul class="typelist">
+					<li class="type-item active" data-url="https://touch.10086.cn/i/mobile/rechargecredit.html">
+						<a href="" class="name">
+							<span class="iconfont">&#xe621;</span>移动宽带
+						</a>
+						<div class="status"></div>
+					</li>
+					<li class="type-item" data-url="http://upay.10010.com/npfwap/npfMobWap/bankcharge/index.html?version=wap&desmobile=6672070486447365">
+						<a href="" class="name">
+							<span class="iconfont">&#xe720;</span>联通宽带
+						</a>
+						<div class="status"></div>
+					</li>
+					<li class="type-item" data-url="https://www.189.cn/client/wap/wapproject/wapclient/wxrecharge/wxrecharge_index.html?shopid=20001181202&shop=20001">
+						<a href="" class="name">
+							<span class="iconfont">&#xe61f;</span>电信宽带
+						</a>
+						<div class="status"></div>
+					</li>
+				</ul>
+				
+				<div class="btn-wrap">
+					<div class="btn-block" onclick="handleClickNext()">下一步</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+	
+	<script>
+		/*顺序依次为:移动,联通,电信*/
+		const dataUrl = [
+			'https://touch.10086.cn/i/mobile/rechargecredit.html',
+			'http://upay.10010.com/npfwap/npfMobWap/bankcharge/index.html?version=wap&desmobile=6672070486447365',
+			'https://www.189.cn/client/wap/wapproject/wapclient/wxrecharge/wxrecharge_index.html?shopid=20001181202&shop=20001'
+		]
+		window.onload = function(){
+			handleSelectType()
+		}
+		
+		var curIndex = 0
+		function handleSelectType(){
+			let typeItemList = document.querySelectorAll('.type-item');
+			let n = typeItemList.length;
+			for(let i=0;i<n;i++){
+				typeItemList[i].onclick = function(){
+					typeItemList.forEach(item=>{
+						item.className = 'type-item'
+					})
+					this.className = 'type-item active'
+					curIndex = i;
+				}
+			}
+		}
+		
+		function handleClickNext() {
+			let thisUrl = dataUrl[curIndex]
+			/*console.log(curIndex)
+			alert(thisUrl)*/
+			window.location.href = thisUrl
+		}
+	</script>
+
+</html>
